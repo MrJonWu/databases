@@ -15,25 +15,14 @@ module.exports = {
         message: req.body.message,
         roomname: req.body.roomname
       };
-      connection.query('INSERT INTO messages SET username = ?', test.username, function(error) {
+      connection.query('INSERT INTO messages SET texty = ?', test.message, function(error) {
         if (error){
           console.log(error.message);
         } else {
-          console.log()
-        }
-      });
-      connection.query('INSERT INTO messages SET roomname = ?', test.roomname, function(error) {
-        if (error){
-          console.log(error.message);
-        } else {
-          console.log()
-        }
-      });
-      connection.query('INSERT INTO messages SET message = ?', test.message, function(error) {
-        if (error){
-          console.log(error.message);
-        } else {
-          console.log()
+          console.log('successful post');
+          console.log(test.message);
+          res.writeHead(201, 'success');
+          res.end();
         }
       });
     } // a function which handles posting a message to the database
@@ -51,10 +40,12 @@ module.exports = {
       var test = req.body.username;
       console.log(test);
       connection.query('INSERT INTO users SET name = ?', test, function(error) {
-        if (error){
+        if (error) {
           console.log(error.message);
         } else {
           console.log('success');
+          res.writeHead(201, 'success');
+          res.end();
         }
       })
       // connection.query('', function(err, rows) {

@@ -1,6 +1,6 @@
-CREATE DATABASE chat1;
+CREATE DATABASE chat4;
 
-USE chat1;
+USE chat4;
 
 CREATE TABLE users (
   id int,
@@ -20,7 +20,7 @@ CREATE TABLE room (
 
 CREATE TABLE messages (
   id int,
-  msg varchar(255),
+  texty varchar(255),
   createdAt int,
   roomId int,
   userId int,

@@ -9,7 +9,7 @@ var connection = mysql.createConnection({
   host: '127.0.0.1',
   user: 'root',
   password: '',
-  database: 'chat1'
+  database: 'chat4'
 });
 
 connection.connect();
