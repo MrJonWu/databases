@@ -1,15 +1,66 @@
+//server/controllers/index.js defines the messages and users controllers that your application will use.
 var models = require('../models');
+var connection = require('../db/index');
 
 module.exports = {
   messages: {
-    get: function (req, res) {}, // a function which handles a get request for all messages
-    post: function (req, res) {} // a function which handles posting a message to the database
+    get: function (req, res) {
+      req.on('data', function(err, data) {
+        console.log(data);
+      });
+    }, // a function which handles a get request for all messages
+    post: function (req, res) {
+      var test = {
+        username: req.body.username,
+        message: req.body.message,
+        roomname: req.body.roomname
+      };
+      connection.query('INSERT INTO messages SET username = ?', test.username, function(error) {
+        if (error){
+          console.log(error.message);
+        } else {
+          console.log()
+        }
+      });
+      connection.query('INSERT INTO messages SET roomname = ?', test.roomname, function(error) {
+        if (error){
+          console.log(error.message);
+        } else {
+          console.log()
+        }
+      });
+      connection.query('INSERT INTO messages SET message = ?', test.message, function(error) {
+        if (error){
+          console.log(error.message);
+        } else {
+          console.log()
+        }
+      });
+    } // a function which handles posting a message to the database
   },
 
   users: {
     // Ditto as above
-    get: function (req, res) {},
-    post: function (req, res) {}
+    get: function (req, res) {
+      req.on('data', function(err, data) {
+        console.log(data);
+      });
+    },
+    post: function (req, res) {
+      console.log('yeyey', req.body);
+      var test = req.body.username;
+      console.log(test);
+      connection.query('INSERT INTO users SET name = ?', test, function(error) {
+        if (error){
+          console.log(error.message);
+        } else {
+          console.log('success');
+        }
+      })
+      // connection.query('', function(err, rows) {
+      //   console.log(rows);
+      // });
+    }
   }
 };
 
